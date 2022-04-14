@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    
+        <div class="unSolSol">
+            <h1>String</h1>
+            <ol><br>
+                <li>Compare two strings lexicographically in Java</li>
+                <details><summary>Open/Close Code</summary>
+                     <div class="codebox">
+                    <div class="code">
+                      <pre>
+ // Java program to show how to compare Strings
+ // using library function
+ public class Test
+ {
+     public static void main(String[] args)
+     {
+         String s1 = "Ram";
+         String s2 = "Ram";
+         String s3 = "Shyam";
+         String s4 = "ABC";
+ 
+         System.out.println(" Comparing strings with compareTo:");
+         System.out.println(s1.compareTo(s2));
+         System.out.println(s1.compareTo(s3));
+         System.out.println(s1.compareTo(s4));
+     }
+ }                      
+                        
+                      </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+  Comparing strings with compareTo:
+  0
+  -1
+  17
+                        </pre>
+                    </div>
+                    </div>
+                </details><br>
+                <li>Java Program to Swap two Strings Without Using any Third Variable</li>
+                <details><summary>Open/Close Code</summary>
+                     <div class="codebox">
+                    <div class="code">
+                      <pre>
+// Java program to swap two strings without using a temporary
+// variable.
+import java.util.*;
+
+class Swap
+{	
+	public static void main(String args[])
+	{
+		// Declare two strings
+		String a = "Hello";
+		String b = "World";
+		
+		// Print String before swapping
+		System.out.println("Strings before swap: a = " +
+									a + " and b = "+b);
+		
+		// append 2nd string to 1st
+		a = a + b;
+		
+		// store initial string a in string b
+		b = a.substring(0,a.length()-b.length());
+		
+		// store initial string b in string a
+		a = a.substring(b.length());
+		
+		// print String after swapping
+		System.out.println("Strings after swap: a = " +
+									a + " and b = " + b);		
+	}	
+}
+
+                      </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+Strings before swap: a = Hello and b = World
+Strings after swap: a = World and b = Hello
+                        </pre>
+                    </div>
+                    </div>
+                </details><br>
+                <li>
+                    Printing Integer between Strings in Java</li>
+                <details><summary>Open/Close Code</summary>
+                     <div class="codebox">
+                    <div class="code">
+                      <pre>
+public class Test
+{
+	public static void main(String[] args)
+	{
+		System.out.println(45+5 + "=" +45+5);
+	}
+}
+
+                      </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+50=455
+                        </pre>
+                    </div>
+                    </div>
+                </details><br>
+                <li>Check whether two Strings are Anagram of each other using HashMap in Java</li>
+                <details><summary>Open/Close Code</summary>
+                     <div class="codebox">
+                    <div class="code">
+                      <pre>
+// Java code to check whether two strings
+// are Anagram or not using HashMap
+
+import java.io.*;
+import java.util.*;
+
+class GFG {
+
+	// Function to check whether two strings
+	// are an anagram of each other
+	static boolean areAnagram(String str1, String str2)
+	{
+
+		HashMap<Character, Integer> hmap1
+			= new HashMap<Character, Integer>();
+		HashMap<Character, Integer> hmap2
+			= new HashMap<Character, Integer>();
+
+		char arr1[] = str1.toCharArray();
+		char arr2[] = str2.toCharArray();
+
+		// Mapping first string
+		for (int i = 0; i < arr1.length; i++) {
+
+			if (hmap1.get(arr1[i]) == null) {
+
+				hmap1.put(arr1[i], 1);
+			}
+			else {
+				Integer c = (int)hmap1.get(arr1[i]);
+				hmap1.put(arr1[i], ++c);
+			}
+		}
+
+		// Mapping second String
+		for (int j = 0; j < arr2.length; j++) {
+
+			if (hmap2.get(arr2[j]) == null)
+				hmap2.put(arr2[j], 1);
+			else {
+
+				Integer d = (int)hmap2.get(arr2[j]);
+				hmap2.put(arr2[j], ++d);
+			}
+		}
+
+		if (hmap1.equals(hmap2))
+			return true;
+		else
+			return false;
+	}
+
+	// Test function
+	public static void test(String str1, String str2)
+	{
+
+		System.out.println("Strings to be checked are:\n"
+						+ str1 + "\n" + str2 + "\n");
+
+		// Find the result
+		if (areAnagram(str1, str2))
+			System.out.println("The two strings are "
+							+ "anagrams of each other\n");
+		else
+			System.out.println("The two strings are not"
+							+ " anagrams of each other\n");
+	}
+
+	// Driver program
+	public static void main(String args[])
+	{
+
+		// Get the Strings
+		String str1 = "geeksforgeeks";
+		String str2 = "forgeeksgeeks";
+
+		// Test the Strings
+		test(str1, str2);
+
+		// Get the Strings
+		str1 = "geeksforgeeks";
+		str2 = "geeks";
+
+		// Test the Strings
+		test(str1, str2);
+	}
+}
+
+                      </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+Strings to be checked are:
+geeksforgeeks
+forgeeksgeeks
+
+The two strings are anagrams of each other
+
+Strings to be checked are:
+geeksforgeeks
+geeks
+
+The two strings are not anagram of each other
+                        </pre>
+                    </div>
+                    </div>
+                </details><br>
+                <li>
+                    Compare two Strings in Java</li>
+                <details><summary>Open/Close Code</summary>
+                     <div class="codebox">
+                    <div class="code">
+                      <pre>
+// Java program to Compare two strings
+// lexicographically
+
+import java.util.*;
+
+public class GFG {
+	public static void main(String args[])
+	{
+		String string1 = new String("Geeksforgeeks");
+		String string2 = new String("Practice");
+		String string3 = new String("Geeks");
+		String string4 = new String("Geeks");
+
+		// Comparing for String 1 < String 2
+		System.out.println("Comparing " + string1 + " and " + string2
+						+ " : " + string1.compareTo(string2));
+
+		// Comparing for String 3 = String 4
+		System.out.println("Comparing " + string3 + " and " + string4
+						+ " : " + string3.compareTo(string4));
+
+		// Comparing for String 1 > String 4
+		System.out.println("Comparing " + string1 + " and " + string4
+						+ " : " + string1.compareTo(string4));
+	}
+}
+
+                      </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+Comparing Geeksforgeeks and Practice : -9
+Comparing Geeks and Geeks : 0
+Comparing Geeksforgeeks and Geeks : 8
+                        </pre>
+                    </div>
+                    </div>
+                </details><br>
+                <li>
+                    Java Program to Add Two Binary Strings</li>
+                <details><summary>Open/Close Code</summary>
+                     <div class="codebox">
+                    <div class="code">
+                      <pre>
+// java program to add two binary strings
+
+public class gfg {
+
+	// Function to add two binary strings
+	static String add_Binary(String x, String y)
+	{
+
+		// Initializing result
+		String res = "";
+
+		// Initializing digit sum
+		int d = 0;
+
+		// Traversing both the strings starting
+		// from the last characters
+		int k = x.length() - 1, l = y.length() - 1;
+		while (k >= 0 || l >= 0 || d == 1) {
+
+			// Computing the sum of last
+			// digits and the carry
+			d += ((k >= 0) ? x.charAt(k) - '0' : 0);
+			d += ((l >= 0) ? y.charAt(l) - '0' : 0);
+
+			// When the current digit's sum is either
+			// 1 or 3 then add 1 to the result
+			res = (char)(d % 2 + '0') + res;
+
+			// Computing carry
+			d /= 2;
+
+			// Moving to the next digits
+			k--;
+			l--;
+		}
+
+		return res;
+	}
+
+	// The Driver code
+	public static void main(String args[])
+	{
+		String x = "011011", y = "1010111";
+
+		System.out.print(add_Binary(x, y));
+	}
+}
+
+                      </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+1110010
+                        </pre>
+                    </div>
+                    </div>
+                </details><br>
+                <li>
+                    How to sort an Array of Strings in Java</li>
+                <details><summary>Open/Close Code</summary>
+                     <div class="codebox">
+                    <div class="code">
+                      <pre>
+// A sample Java program to sort
+// an arrayList of strings
+// in ascending and descending
+// orders using Collections.sort().
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class SortExample {
+	public static void main(String[] args)
+	{
+		ArrayList<String> al = new ArrayList<String>();
+		al.add("practice.geeksforgeeks.org");
+		al.add("quiz.geeksforgeeks.org");
+		al.add("code.geeksforgeeks.org");
+
+		// Sorts ArrayList in ascending order
+		Collections.sort(al);
+		System.out.println(
+			"Modified ArrayList : \n" + al);
+
+		// Sorts arr[] in descending order
+		Collections.sort(al,
+						Collections.reverseOrder());
+
+		System.out.println(
+			"Modified ArrayList : \n" + al);
+	}
+}
+
+                      </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+Modified ArrayList : 
+ 
+Modified ArrayList : 
+[quiz.geeksforgeeks.org, practice.geeksforgeeks.org, code.geeksforgeeks.org] 
+                        </pre>
+                    </div>
+                    </div>
+                </details><br>
+                <li>
+                    Java Program to check if strings are rotations of each other or not</li>
+                <details><summary>Open/Close Code</summary>
+                     <div class="codebox">
+                    <div class="code">
+                      <pre>
+// Java program to check if two given strings are rotations of
+// each other
+
+class StringRotation
+{
+	/* Function checks if passed strings (str1 and str2)
+	are rotations of each other */
+	static boolean areRotations(String str1, String str2)
+	{
+		// There lengths must be same and str2 must be
+		// a substring of str1 concatenated with str1.
+		return (str1.length() == str2.length()) &&
+			((str1 + str1).indexOf(str2) != -1);
+	}
+	
+	// Driver method
+	public static void main (String[] args)
+	{
+		String str1 = "AACD";
+		String str2 = "ACDA";
+
+		if (areRotations(str1, str2))
+			System.out.println("Strings are rotations of each other");
+		else
+			System.out.printf("Strings are not rotations of each other");
+	}
+}
+// This code is contributed by munjal
+
+                      </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+Strings are rotations of each other
+                        </pre>
+                    </div>
+                    </div>
+                </details><br>
+                <li>
+                    Java Program to Replace All Line Breaks from Strings</li>
+                <details><summary>Open/Close Code</summary>
+                    <div class="codebox">
+                        <div class="code">
+                          <pre>
+// Java Program to Replace All
+// Line Breaks from Strings
+
+public class remove {
+	public static void main(String[] args)
+	{
+		String s = "Replace\n"
+				+ " all\n"
+				+ " line\n"
+				+ " breaks\n"
+				+ " from\n"
+				+ " strings";
+	
+		System.out.println(
+			"Original String with line breaks - " + s);
+	
+		// replacing line breaks from string
+		s = s.replace("\n", "");
+	
+		System.out.println(
+			"String after replacing line breaks - " + s);
+	}
+}
+
+                          </pre>
+                            <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                        </div>
+                        <h2>Output</h2>
+                        <div class="output">
+                            <pre>
+Original String with line breaks - Replace
+all
+line
+breaks
+from
+strings
+String after replacing line breaks - Replace all line breaks from strings
+                            </pre>
+                        </div>
+                        </div></details><br>
+                <li>
+                    Java Program for Minimum move to end operations to make all strings equal</li>
+                <details><summary>Open/Close Code</summary>
+                    <div class="codebox">
+                        <div class="code">
+                          <pre>
+// Java program to make all
+// strings same using move
+// to end operations.
+import java.util.*;
+class GFG
+{
+
+// Returns minimum number of
+// moves to end operations
+// to make all strings same.
+static int minimunMoves(String arr[], int n)
+{
+	int ans = Integer.MAX_VALUE;
+	for (int i = 0; i < n; i++)
+	{
+		int curr_count = 0;
+
+		// Consider s[i] as target
+		// string and count rotations
+		// required to make all other
+		// strings same as str[i].
+		String tmp = "";
+		for (int j = 0; j < n; j++)
+		{
+			tmp = arr[j] + arr[j];
+
+			// find function returns the
+			// index where we found arr[i]
+			// which is actually count of
+			// move-to-front operations.
+			int index = tmp.indexOf(arr[i]);
+
+			// If any two strings are not
+			// rotations of each other,
+			// we can't make them same.
+			if (index == arr[i].length())
+				return -1;
+				
+			curr_count += index;
+		}
+
+		ans = Math.min(curr_count, ans);
+	}
+
+	return ans;
+}
+
+// Driver code
+public static void main(String args[])
+{
+	String arr[] = {"xzzwo", "zwoxz",
+					"zzwox", "xzzwo"};
+	int n = arr.length;
+	System.out.println(minimunMoves(arr, n));
+}
+}
+
+// This code is contributed
+// by Kirti_Mangal
+
+                          </pre>
+                            <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                        </div>
+                        <h2>Output</h2>
+                        <div class="output">
+                            <pre>
+5
+                            </pre>
+                        </div>
+                        </div></details>
+              
+            </ol>
+        </div>
+    
+</body>
+</html>

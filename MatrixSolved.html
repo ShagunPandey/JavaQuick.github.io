@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    
+        <div class="unSolSol">
+            <h1>Matrix</h1><br>
+            <ol>
+                <li>Rotate Matrix Elements</li>
+                <details><summary>Open/Close Program</summary>
+                     <div class="codebox">
+                    <div class="code">
+                      <pre>
+// Java program to rotate a matrix
+import java.lang.*;
+import java.util.*;
+
+class GFG
+{
+	static int R = 4;
+	static int C = 4;
+
+	// A function to rotate a matrix
+	// mat[][] of size R x C.
+	// Initially, m = R and n = C
+	static void rotatematrix(int m,
+					int n, int mat[][])
+	{
+		int row = 0, col = 0;
+		int prev, curr;
+
+		/*
+		row - Starting row index
+		m - ending row index
+		col - starting column index
+		n - ending column index
+		i - iterator
+		*/
+		while (row < m && col < n)
+		{
+	
+			if (row + 1 == m || col + 1 == n)
+				break;
+	
+			// Store the first element of next
+			// row, this element will replace
+			// first element of current row
+			prev = mat[row + 1][col];
+	
+			// Move elements of first row
+			// from the remaining rows
+			for (int i = col; i < n; i++)
+			{
+				curr = mat[row][i];
+				mat[row][i] = prev;
+				prev = curr;
+			}
+			row++;
+	
+			// Move elements of last column
+			// from the remaining columns
+			for (int i = row; i < m; i++)
+			{
+				curr = mat[i][n-1];
+				mat[i][n-1] = prev;
+				prev = curr;
+			}
+			n--;
+	
+			// Move elements of last row
+			// from the remaining rows
+			if (row < m)
+			{
+				for (int i = n-1; i >= col; i--)
+				{
+					curr = mat[m-1][i];
+					mat[m-1][i] = prev;
+					prev = curr;
+				}
+			}
+			m--;
+	
+			// Move elements of first column
+			// from the remaining rows
+			if (col < n)
+			{
+				for (int i = m-1; i >= row; i--)
+				{
+					curr = mat[i][col];
+					mat[i][col] = prev;
+					prev = curr;
+				}
+			}
+			col++;
+		}
+
+			// Print rotated matrix
+			for (int i = 0; i < R; i++)
+			{
+				for (int j = 0; j < C; j++)
+				System.out.print( mat[i][j] + " ");
+				System.out.print("\n");
+			}
+	}
+
+/* Driver program to test above functions */
+	public static void main(String[] args)
+	{
+	// Test Case 1
+	int a[][] = { {1, 2, 3, 4},
+				{5, 6, 7, 8},
+				{9, 10, 11, 12},
+				{13, 14, 15, 16} };
+
+	// Test Case 2
+	/* int a[][] = new int {{1, 2, 3},
+							{4, 5, 6},
+							{7, 8, 9}
+						};*/
+	rotatematrix(R, C, a);
+	
+	}
+}
+
+// This code is contributed by Sahil_Bansall
+
+                      </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div></div>
+                </details><br>
+                <li>Rotate a Matrix by 180 degree</li>
+                <details><summary>Open/Close Program</summary>
+                     <div class="codebox">
+                    <div class="code">
+                      <pre>
+// Java program to rotate a
+// matrix by 180 degrees
+import java.util.*;
+
+class GFG {
+	static int N = 3;
+
+	// Function to Rotate the
+	// matrix by 180 degree
+	static void rotateMatrix(int mat[][])
+	{
+
+		// Simply print from last
+		// cell to first cell.
+		for (int i = N - 1; i >= 0; i--) {
+			for (int j = N - 1; j >= 0; j--)
+				System.out.print(mat[i][j] + " ");
+
+			System.out.println();
+		}
+	}
+
+	// Driver Code
+	public static void main(String[] args)
+	{
+		int[][] mat = { { 1, 2, 3 },
+						{ 4, 5, 6 },
+						{ 7, 8, 9 } };
+
+		rotateMatrix(mat);
+	}
+}
+
+// This code is contributed by ChitraNayal
+
+                      </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+9 8 7 
+6 5 4 
+3 2 1  
+                        </pre>
+                    </div>
+                    </div>
+                </details><br>
+                <li>Check if all rows of a matrix are circular rotations of each other</li>
+                <details><summary>Open/Close Program</summary>
+                     <div class="codebox">
+                    <div class="code">
+                      <pre>
+// Java program to check if all rows of a matrix
+// are rotations of each other
+class GFG
+{
+
+	static int MAX = 1000;
+
+	// Returns true if all rows of mat[0..n-1][0..n-1]
+	// are rotations of each other.
+	static boolean isPermutedMatrix(int mat[][], int n)
+	{
+		// Creating a string that contains
+		// elements of first row.
+		String str_cat = "";
+		for (int i = 0; i < n; i++)
+		{
+			str_cat = str_cat + "-" + String.valueOf(mat[0][i]);
+		}
+
+		// Concatenating the string with itself
+		// so that substring search operations
+		// can be performed on this
+		str_cat = str_cat + str_cat;
+
+		// Start traversing remaining rows
+		for (int i = 1; i < n; i++)
+		{
+			// Store the matrix into vector in the form
+			// of strings
+			String curr_str = "";
+			for (int j = 0; j < n; j++)
+			{
+				curr_str = curr_str + "-" + String.valueOf(mat[i][j]);
+			}
+
+			// Check if the current string is present in
+			// the concatenated string or not
+			if (str_cat.contentEquals(curr_str))
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	// Drivers code
+	public static void main(String[] args)
+	{
+		int n = 4;
+		int mat[][] = {{1, 2, 3, 4},
+		{4, 1, 2, 3},
+		{3, 4, 1, 2},
+		{2, 3, 4, 1}
+		};
+		if (isPermutedMatrix(mat, n))
+		{
+			System.out.println("Yes");
+		}
+		else
+		{
+			System.out.println("No");
+		}
+	}
+}
+
+/* This code contributed by PrinciRaj1992 */
+
+                      </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+Yes
+                        </pre>
+                    </div>
+                    </div>
+                </details><br>
+                <li>Sort the given matrix</li>
+                <details><summary>Open/Close Program</summary>
+                     <div class="codebox">
+                    <div class="code">
+                      <pre>
+// Java implementation to
+// sort the given matrix
+import java.io.*;
+import java.util.*;
+
+class GFG {
+	
+	static int SIZE = 10;
+
+	// function to sort the given matrix
+	static void sortMat(int mat[][], int n)
+	{
+		// temporary matrix of size n^2
+		int temp[] = new int[n * n];
+		int k = 0;
+	
+		// copy the elements of matrix
+		// one by one into temp[]
+		for (int i = 0; i < n; i++)
+			for (int j = 0; j < n; j++)
+				temp[k++] = mat[i][j];
+	
+		// sort temp[]
+		Arrays.sort(temp);
+		
+		// copy the elements of temp[]
+		// one by one in mat[][]
+		k = 0;
+		for (int i = 0; i < n; i++)
+			for (int j = 0; j < n; j++)
+				mat[i][j] = temp[k++];
+	}
+	
+	// function to print the given matrix
+	static void printMat(int mat[][], int n)
+	{
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++)
+				System.out.print( mat[i][j] + " ");
+			System.out.println();
+		}
+	}
+	
+	// Driver program to test above
+	public static void main(String args[])
+	{
+		int mat[][] = { { 5, 4, 7 },
+						{ 1, 3, 8 },
+						{ 2, 9, 6 } };
+		int n = 3;
+	
+		System.out.println("Original Matrix:");
+		printMat(mat, n);
+	
+		sortMat(mat, n);
+	
+		System.out.println("Matrix After Sorting:");
+		printMat(mat, n);
+	
+	}
+}
+
+// This code is contributed by Nikita Tiwari.
+                         
+                      </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+Original Matrix:
+5 4 7
+1 3 8
+2 9 6
+
+Matrix After Sorting:
+1 2 3
+4 5 6
+7 8 9
+                        </pre>
+                    </div>
+                    </div>
+                </details><br>
+                <li>Find median in row wise sorted matrix</li>
+                <details><summary>Open/Close Program</summary>
+                     <div class="codebox">
+                    <div class="code">
+                      <pre>
+// Java program to find median of a matrix
+// sorted row wise
+import java.util.Arrays;
+
+public class MedianInRowSorted
+{
+	// function to find median in the matrix
+	static int binaryMedian(int m[][],int r, int c)
+	{
+		int max = Integer.MIN_VALUE;
+		int min = Integer.MAX_VALUE;
+		
+		for(int i=0; i<r ; i++)
+		{
+			
+			// Finding the minimum element
+			if(m[i][0] < min)
+				min = m[i][0];
+			
+			// Finding the maximum element
+			if(m[i][c-1] > max)
+				max = m[i][c-1];
+		}
+		
+		int desired = (r * c + 1) / 2;
+		while(min < max)
+		{
+			int mid = min + (max - min) / 2;
+			int place = 0;
+			int get = 0;
+			
+			// Find count of elements smaller than mid
+			for(int i = 0; i < r; ++i)
+			{
+				
+				get = Arrays.binarySearch(m[i],mid);
+				
+				// If element is not found in the array the
+				// binarySearch() method returns
+				// (-(insertion_point) - 1). So once we know
+				// the insertion point we can find elements
+				// Smaller than the searched element by the
+				// following calculation
+				if(get < 0)
+					get = Math.abs(get) - 1;
+				
+				// If element is found in the array it returns
+				// the index(any index in case of duplicate). So we go to last
+				// index of element which will give the number of
+				// elements smaller than the number including
+				// the searched element.
+				else
+				{
+					while(get < m[i].length && m[i][get] == mid)
+						get += 1;
+				}
+				
+				place = place + get;
+			}
+			
+			if (place < desired)
+				min = mid + 1;
+			else
+				max = mid;
+		}
+		return min;
+	}
+	
+	// Driver Program to test above method.
+	public static void main(String[] args)
+	{
+		int r = 3, c = 3;
+		int m[][]= { {1,3,5}, {2,6,9}, {3,6,9} };
+		
+		System.out.println("Median is " + binaryMedian(m, r, c));
+	}
+}
+
+// This code is contributed by Sumit Ghosh
+
+                      </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+Median is 5
+                        </pre>
+                    </div>
+                    </div>
+                </details><br>
+                <li>Program to multiply two matrices</li>
+                <details><summary>Open/Close Program</summary>
+                     <div class="codebox">
+                    <div class="code">
+                      <pre>
+// Java program to multiply two square
+// matrices.
+import java.io.*;
+
+class GFG {
+
+	static int N = 4;
+
+	// This function multiplies mat1[][]
+	// and mat2[][], and stores the result
+	// in res[][]
+	static void multiply(int mat1[][],
+						int mat2[][], int res[][])
+	{
+		int i, j, k;
+		for (i = 0; i < N; i++) {
+			for (j = 0; j < N; j++) {
+				res[i][j] = 0;
+				for (k = 0; k < N; k++)
+					res[i][j] += mat1[i][k]
+								* mat2[k][j];
+			}
+		}
+	}
+
+	// Driver code
+	public static void main(String[] args)
+	{
+		int mat1[][] = { { 1, 1, 1, 1 },
+						{ 2, 2, 2, 2 },
+						{ 3, 3, 3, 3 },
+						{ 4, 4, 4, 4 } };
+
+		int mat2[][] = { { 1, 1, 1, 1 },
+						{ 2, 2, 2, 2 },
+						{ 3, 3, 3, 3 },
+						{ 4, 4, 4, 4 } };
+
+		// To store result
+		int res[][] = new int[N][N];
+		int i, j;
+		multiply(mat1, mat2, res);
+
+		System.out.println("Result matrix"
+						+ " is ");
+		for (i = 0; i < N; i++) {
+			for (j = 0; j < N; j++)
+				System.out.print(res[i][j]
+								+ " ");
+			System.out.println();
+		}
+	}
+}
+
+// This code is contributed by anuj_67.
+
+                      </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+Result matrix is 
+10 10 10 10 
+20 20 20 20 
+30 30 30 30 
+40 40 40 40 
+                        </pre>
+                    </div>
+                    </div>
+                </details><br>
+                <li>Program for scalar multiplication of a matrix</li>
+                <details><summary>Open/Close Program</summary>
+                     <div class="codebox">
+                    <div class="code">
+                      <pre>
+// Java program to find
+// the scalar product
+// of a matrix
+import java.io.*;
+
+class GFG {
+	
+static final int N = 3;
+static void scalarProductMat(int mat[][],
+								int k)
+{
+	
+	// scalar element is multiplied
+	// by the matrix
+	for (int i = 0; i < N; i++)
+		for (int j = 0; j < N; j++)
+			mat[i][j] = mat[i][j] * k;
+}
+
+// Driver code
+public static void main (String[] args)
+{
+	int mat[][] = { { 1, 2, 3 },
+					{ 4, 5, 6 },
+					{ 7, 8, 9 } };
+	int k = 4;
+
+	scalarProductMat(mat, k);
+
+	// to display the resultant matrix
+	System.out.println("Scalar Product Matrix is : ");
+	
+	for (int i = 0; i < N; i++)
+	{
+		for (int j = 0; j < N; j++)
+			System.out.print(mat[i][j] + " ");
+		System.out.println();
+	}
+}
+}
+
+// This code is contributed by Ajit.
+
+                      </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+Scalar Product Matrix is : 
+4 8 12 
+16 20 24 
+28 32 36
+						</pre>
+                    </div>
+                    </div>
+                </details><br>
+                <li>Find distinct elements common to all rows of a matrix</li>
+                <details><summary>Open/Close Program</summary>
+                     <div class="codebox">
+                    <div class="code">
+                      <pre>
+// JAVA Code to find distinct elements
+// common to all rows of a matrix
+import java.util.*;
+
+class GFG {
+	
+	// function to individually sort
+	// each row in increasing order
+	public static void sortRows(int mat[][], int n)
+	{
+		for (int i=0; i<n; i++)
+			Arrays.sort(mat[i]);
+	}
+	
+	// function to find all the common elements
+	public static void findAndPrintCommonElements(int mat[][],
+													int n)
+	{
+		// sort rows individually
+		sortRows(mat, n);
+	
+		// current column index of each row is stored
+		// from where the element is being searched in
+		// that row
+		int curr_index[] = new int[n];
+		
+		int f = 0;
+	
+		for (; curr_index[0]<n; curr_index[0]++)
+		{
+			// value present at the current column index
+			// of 1st row
+			int value = mat[0][curr_index[0]];
+	
+			boolean present = true;
+	
+			// 'value' is being searched in all the
+			// subsequent rows
+			for (int i=1; i<n; i++)
+			{
+				// iterate through all the elements of
+				// the row from its current column index
+				// till an element greater than the 'value'
+				// is found or the end of the row is
+				// encountered
+				while (curr_index[i] < n &&
+					mat[i][curr_index[i]] <= value)
+					curr_index[i]++;
+	
+				// if the element was not present at the
+				// column before to the 'curr_index' of the
+			// row
+				if (mat[i][curr_index[i]-1] != value)
+					present = false;
+	
+				// if all elements of the row have
+				// been traversed
+				if (curr_index[i] == n)
+				{
+					f = 1;
+					break;
+				}
+			}
+	
+			// if the 'value' is common to all the rows
+			if (present)
+			System.out.print(value+" ");
+	
+			// if any row have been completely traversed
+			// then no more common elements can be found
+			if (f == 1)
+				break;
+		}
+	}
+	
+	/* Driver program to test above function */
+	public static void main(String[] args)
+	{
+		int mat[][] = { {12, 1, 14, 3, 16},
+						{14, 2, 1, 3, 35},
+						{14, 1, 14, 3, 11},
+						{14, 25, 3, 2, 1},
+						{1, 18, 3, 21, 14}
+											};
+		
+			int n = 5;
+			findAndPrintCommonElements(mat, n);
+	}
+}
+// This code is contributed by Arnav Kr. Mandal.
+
+					  </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+1 3 14
+						</pre>
+                    </div>
+                    </div>
+                </details><br>
+                <li>Print a given matrix in spiral form</li>
+                <details><summary>Open/Close Program</summary>
+                    <div class="codebox">
+                        <div class="code">
+                          <pre>
+// Java program for the above approach
+import java.util.*;
+
+class Solution {
+
+	// Function to print in spiral order
+	public static List<Integer> spiralOrder(int[][] matrix) {
+		List<Integer> ans = new ArrayList<Integer>();
+
+		if (matrix.length == 0)
+			return ans;
+
+		int R = matrix.length, C = matrix[0].length;
+		boolean[][] seen = new boolean[R][C];
+		int[] dr = { 0, 1, 0, -1 };
+		int[] dc = { 1, 0, -1, 0 };
+		int r = 0, c = 0, di = 0;
+
+		// Iterate from 0 to R * C - 1
+		for (int i = 0; i < R * C; i++) {
+			ans.add(matrix[r]);
+			seen[r] = true;
+			int cr = r + dr[di];
+			int cc = c + dc[di];
+
+			if (0 <= cr && cr < R && 0 <= cc && cc < C
+					&& !seen[cr][cc]) {
+				r = cr;
+				c = cc;
+			} else {
+				di = (di + 1) % 4;
+				r += dr[di];
+				c += dc[di];
+			}
+		}
+		return ans;
+	}
+
+	// Driver Code
+	public static void main(String[] args) {
+		int a[][] = { { 1, 2, 3, 4 },
+				{ 5, 6, 7, 8 },
+				{ 9, 10, 11, 12 },
+				{ 13, 14, 15, 16 } };
+
+		System.out.println(spiralOrder(a));
+	}
+}
+
+						  </pre>
+                            <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                        </div>
+                        <h2>Output</h2>
+                        <div class="output">
+                            <pre>
+1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10 
+							</pre>
+                        </div>
+                        </div></details><br>
+                <li>Find unique elements in a matrix</li>
+                <details><summary>Open/Close Program</summary>
+                    <div class="codebox">
+                        <div class="code">
+                          <pre>
+// Java program to find unique
+// element in matrix
+class GFG
+{
+static int R = 4, C = 4;
+
+// function that calculate
+// unique element
+static void unique(int mat[][],
+				int n, int m)
+{
+	int maximum = 0, flag = 0;
+	for(int i = 0; i < n; i++)
+		for(int j = 0; j < m; j++)
+		
+			// Find maximum element
+			// in a matrix
+			if(maximum < mat[i][j])
+					maximum = mat[i][j];
+
+	// Take 1-D array of
+	// (maximum + 1) size
+	int b[] = new int [maximum + 1];
+	for(int i = 0 ; i < n; i++)
+		for(int j = 0; j < m; j++)
+			b[mat[i][j]]++;
+
+	//print unique element
+	for(int i = 1; i <= maximum; i++)
+		if(b[i] == 1)
+			System.out.print(i + " ");
+			flag = 1;
+			
+	if(flag == 0)
+	{
+		System.out.println("No unique element " +
+								"in the matrix");
+	}
+}
+
+// Driver Code
+public static void main(String args[])
+{
+	int mat[][] = {{1, 2, 3, 20},
+				{5, 6, 20, 25},
+				{1, 3, 5, 6},
+				{6, 7, 8, 15}};
+					
+	// function that calculate
+	// unique element
+	unique(mat, R, C);
+}
+}
+
+// This code is contributed
+// by Arnab Kundu
+
+						  </pre>
+                            <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                        </div>
+                        <h2>Output</h2>
+                        <div class="output">
+                            <pre>
+2 7 8 15 25 
+							</pre>
+                        </div>
+                        </div></details><br>
+                <li>Swap major and minor diagonals of a square matrix</li>
+                <details><summary>Open/Close Program</summary>
+                    <div class="codebox">
+                        <div class="code">
+                          <pre>
+// Java implementation to swap
+// diagonal of a matrix
+import java.io.*;
+
+class Gfg {
+static int N = 3;
+
+// Function to swap diagonal of matrix
+static void swapDiagonal(int matrix[][]) {
+	for (int i = 0; i < N; i++) {
+	int temp = matrix[i][i];
+	matrix[i][i] = matrix[i][N - i - 1];
+	matrix[i][N - i - 1] = temp;
+	}
+}
+
+// Driver function
+public static void main(String arg[]) {
+	int matrix[][] = {{0, 1, 2},
+					{3, 4, 5},
+					{6, 7, 8}};
+
+	swapDiagonal(matrix);
+
+	// Displaying modified matrix
+	for (int i = 0; i < N; i++) {
+	for (int j = 0; j < N; j++)
+		System.out.print(matrix[i][j] + " ");
+	System.out.println();
+	}
+}
+}
+
+// This code is contributed by Anant Agarwal.
+
+						  </pre>
+                            <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                        </div>
+                        <h2>Output</h2>
+                        <div class="output">
+                            <pre>
+2 1 0
+3 4 5
+8 7 6
+							</pre>
+                        </div>
+                        </div></details><br>
+              
+                <li>Sum of middle row and column in Matrix</li>
+                <details><summary>Open/Close Program</summary>
+                    <div class="codebox">
+                        <div class="code">
+                          <pre>
+// java program to find sum of
+// middle row and column in matrix
+
+import java.io.*;
+
+class GFG {
+	
+
+static int MAX = 100;
+
+static void middlesum(int mat[][], int n)
+{
+
+	int row_sum = 0, col_sum = 0;
+	
+	// loop for sum of row
+	for (int i = 0; i < n; i++)
+		row_sum += mat[n / 2][i];
+	
+	System.out.println ( "Sum of middle row = "
+				+ row_sum);
+	
+	// loop for sum of column
+	for (int i = 0; i < n; i++)
+		col_sum += mat[i][n / 2];
+	
+	System.out.println ( "Sum of middle column = "
+				+ col_sum);
+}
+
+// Driver function
+	public static void main (String[] args) {
+		int mat[][] = {{2, 5, 7},
+					{3, 7, 2},
+					{5, 6, 9}};
+	
+		middlesum(mat, 3);
+	
+	}
+}
+
+// This code is contributed by vt_m.
+
+						  </pre>
+                            <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                        </div>
+                        <h2>Output</h2>
+                        <div class="output">
+                            <pre>
+Sum of middle row = 12
+Sum of middle column = 18
+							</pre>
+                        </div>
+                        </div></details><br>
+                <li>Program to check diagonal matrix and scalar matrix</li>
+                <details><summary>Open/Close Program</summary>
+                    <div class="codebox">
+                        <div class="code">
+                          <pre>
+// Program to check matrix is
+// diagonal matrix or not.
+
+import java.io.*;
+
+class GFG {
+	
+	static int N = 4;
+	
+	// Function to check matrix
+	// is diagonal matrix
+	// or not.
+	static boolean isDiagonalMatrix(int mat[][])
+	{
+		for (int i = 0; i < N; i++)
+			for (int j = 0; j < N; j++)
+	
+				// condition to check
+				// other elements
+				// except main diagonal
+				// are zero or not.
+				if ((i != j) &&
+				(mat[i][j] != 0))
+					return false;
+
+		return true;
+	}
+	
+	// Driver function
+	public static void main(String args[])
+	{
+		int mat[][] = { { 4, 0, 0, 0 },
+						{ 0, 7, 0, 0 },
+						{ 0, 0, 5, 0 },
+						{ 0, 0, 0, 1 } };
+	
+		if (isDiagonalMatrix(mat))
+			System.out.println("Yes");
+		else
+			System.out.println("No" );
+	}
+}
+
+// This code is contributed by
+// Nikita Tiwari.
+
+						  </pre>
+                            <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                        </div>
+                        <h2>Output</h2>
+                        <div class="output">
+                            <pre>
+Yes
+							</pre>
+                        </div>
+                        </div></details>
+            </ol>
+        </div>
+    
+</body>
+</html>

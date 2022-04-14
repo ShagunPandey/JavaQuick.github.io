@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    <div class="unSolSol">
+        <h1>Array</h1><br>
+        <ol>
+            <li>Write a program to reverse an array or string</li>
+            <details>
+                <summary>Open/Close Code</summary>
+                <div class="codebox">
+                    <div class="code">
+                        <pre>
+      // Iterative java program to reverse an
+      // array
+         public class GFG {
+                                
+     /* Function to reverse arr[] from
+     start to end*/
+     static void rvereseArray(int arr[],
+                     int start, int end)
+     {
+         int temp;
+         
+         while (start < end)
+         {
+             temp = arr[start];
+             arr[start] = arr[end];
+             arr[end] = temp;
+             start++;
+             end--;
+         }
+     }	                          
+                                
+     /* Utility that prints out an
+     array on a line */
+     static void printArray(int arr[],
+                             int size)
+     {
+         for (int i = 0; i < size; i++)
+             System.out.print(arr[i] + " ");
+         
+         System.out.println();
+     }
+ 
+     // Driver code
+     public static void main(String args[]) {
+         
+         int arr[] = {1, 2, 3, 4, 5, 6};
+         printArray(arr, 6);
+         rvereseArray(arr, 0, 5);
+         System.out.print("Reversed array is \n");
+         printArray(arr, 6);
+         
+     }
+ }                          
+                    
+  </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+1 2 3 4 5 6 
+Reversed array is 
+ 6 5 4 3 2 1                                     
+                                     </pre>
+                    </div>
+                </div>
+            </details><br>
+            <li>Find the minimum element in a sorted and rotated array</li>
+            <details>
+                <summary>Open/Close Code</summary>
+                <div class="codebox">
+                    <div class="code">
+                        <pre>
+ // Java program to find minimum element in a sorted and rotated array
+ import java.util.*;
+ import java.lang.*;
+ import java.io.*;
+ 
+ class Minimum
+ {
+     static int findMin(int arr[], int low, int high)
+     {
+         // This condition is needed to handle the case when array
+         // is not rotated at all
+         if (high < low) return arr[0];
+         // If there is only one element left
+         if (high == low) return arr[low];
+ 
+         // Find mid
+         int mid = low + (high - low)/2; /*(low + high)/2;*/
+ 
+         // Check if element (mid+1) is minimum element. Consider
+         // the cases like {3, 4, 5, 1, 2}
+         if (mid < high && arr[mid+1] < arr[mid])
+             return arr[mid+1];
+ 
+         // Check if mid itself is minimum element
+         if (mid > low && arr[mid] < arr[mid - 1])
+             return arr[mid];
+ 
+         // Decide whether we need to go to left half or right half
+         if (arr[high] > arr[mid])
+             return findMin(arr, low, mid-1);
+         return findMin(arr, mid+1, high);
+     }
+ 
+     // Driver Program
+     public static void main (String[] args)
+     {
+         int arr1[] = {5, 6, 1, 2, 3, 4};
+         int n1 = arr1.length;
+         System.out.println("The minimum element is "+ findMin(arr1, 0, n1-1));
+ 
+         int arr2[] = {1, 2, 3, 4};
+         int n2 = arr2.length;
+         System.out.println("The minimum element is "+ findMin(arr2, 0, n2-1));
+ 
+         int arr3[] = {1};
+         int n3 = arr3.length;
+         System.out.println("The minimum element is "+ findMin(arr3, 0, n3-1));
+ 
+         int arr4[] = {1, 2};
+         int n4 = arr4.length;
+         System.out.println("The minimum element is "+ findMin(arr4, 0, n4-1));
+ 
+         int arr5[] = {2, 1};
+         int n5 = arr5.length;
+         System.out.println("The minimum element is "+ findMin(arr5, 0, n5-1));
+ 
+         int arr6[] = {5, 6, 7, 1, 2, 3, 4};
+         int n6 = arr6.length;
+         System.out.println("The minimum element is "+ findMin(arr6, 0, n6-1));
+ 
+         int arr7[] = {1, 2, 3, 4, 5, 6, 7};
+         int n7 = arr7.length;
+         System.out.println("The minimum element is "+ findMin(arr7, 0, n7-1));
+ 
+         int arr8[] = {2, 3, 4, 5, 6, 7, 8, 1};
+         int n8 = arr8.length;
+         System.out.println("The minimum element is "+ findMin(arr8, 0, n8-1));
+ 
+         int arr9[] = {3, 4, 5, 1, 2};
+                                
+         // Check if element (mid+1) is minimum element. Consider
+         // the cases like {3, 4, 5, 1, 2}
+         if (mid < high && arr[mid+1] < arr[mid])
+             return arr[mid+1];
+ 
+         // Check if mid itself is minimum element
+         if (mid > low && arr[mid] < arr[mid - 1])
+             return arr[mid];
+ 
+         // Decide whether we need to go to left half or right half
+         if (arr[high] > arr[mid])
+             return findMin(arr, low, mid-1);
+         return findMin(arr, mid+1, high);
+     }
+ 
+     // Driver Program
+     public static void main (String[] args)
+     {
+         int arr1[] = {5, 6, 1, 2, 3, 4};
+         int n1 = arr1.length;
+         System.out.println("The minimum element is "+ findMin(arr1, 0, n1-1));
+ 
+         int arr2[] = {1, 2, 3, 4};
+         int n2 = arr2.length;
+         System.out.println("The minimum element is "+ findMin(arr2, 0, n2-1));
+ 
+         int arr3[] = {1};
+         int n3 = arr3.length;
+         System.out.println("The minimum element is "+ findMin(arr3, 0, n3-1));
+ 
+         int arr4[] = {1, 2};
+         int n4 = arr4.length;
+         System.out.println("The minimum element is "+ findMin(arr4, 0, n4-1));
+ 
+         int arr5[] = {2, 1};
+         int n5 = arr5.length;
+         System.out.println("The minimum element is "+ findMin(arr5, 0, n5-1));
+ 
+         int arr6[] = {5, 6, 7, 1, 2, 3, 4};
+         int n6 = arr6.length;
+         System.out.println("The minimum element is "+ findMin(arr6, 0, n6-1));
+ 
+         int arr7[] = {1, 2, 3, 4, 5, 6, 7};                   
+         int n7 = arr7.length;
+         System.out.println("The minimum element is "+ findMin(arr7, 0, n7-1));
+ 
+         int arr8[] = {2, 3, 4, 5, 6, 7, 8, 1};
+         int n8 = arr8.length;
+         System.out.println("The minimum element is "+ findMin(arr8, 0, n8-1));
+ 
+         int arr9[] = {3, 4, 5, 1, 2};
+                                
+ int n9 = arr9.length;
+     System.out.println("The minimum element is "+ findMin(arr9, 0, n9-1));
+ }
+}                          
+                                 
+                        </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+ The minimum element is 1
+The minimum element is 1
+The minimum element is 1
+The minimum element is 1
+The minimum element is 1
+The minimum element is 1
+The minimum element is 1
+The minimum element is 1
+The minimum element is 1
+                        </pre>
+                    </div>
+                </div>
+            </details><br>
+            <li>Search an element in a sorted and rotated array</li>
+            <details>
+                <summary>Open/Close Code</summary>
+                <div class="codebox">
+                    <div class="code">
+                        <pre>
+/* Java program to search an element
+in a sorted and pivoted array*/
+                        
+class Main {
+
+    /* Searches an element key in a
+    pivoted sorted array arrp[]
+    of size n */
+    static int pivotedBinarySearch(int arr[], int n, int key)
+    {
+        int pivot = findPivot(arr, 0, n - 1);
+
+        // If we didn't find a pivot, then
+        // array is not rotated at all
+        if (pivot == -1)
+            return binarySearch(arr, 0, n - 1, key);
+
+        // If we found a pivot, then first
+        // compare with pivot and then
+        // search in two subarrays around pivot
+        if (arr[pivot] == key)
+            return pivot;
+        if (arr[0] <= key)
+            return binarySearch(arr, 0, pivot - 1, key);
+        return binarySearch(arr, pivot + 1, n - 1, key);
+    }
+
+    /* Function to get pivot. For array
+    3, 4, 5, 6, 1, 2 it returns
+    3 (index of 6) */                      
+    static int findPivot(int arr[], int low, int high)
+    {
+        // base cases
+        if (high < low)
+            return -1;
+        if (high == low)
+            return low;
+
+        /* low + (high - low)/2; */
+        int mid = (low + high) / 2;
+        if (mid < high && arr[mid] > arr[mid + 1])
+            return mid;
+        if (mid > low && arr[mid] < arr[mid - 1])
+            return (mid - 1);
+        if (arr[low] >= arr[mid])
+            return findPivot(arr, low, mid - 1);
+        return findPivot(arr, mid + 1, high);
+    }
+
+    /* Standard Binary Search function */
+    static int binarySearch(int arr[], int low, int high, int key)
+    {
+        if (high < low)
+            return -1;
+
+        /* low + (high - low)/2; */
+        int mid = (low + high) / 2;
+        if (key == arr[mid])
+            return mid;
+        if (key > arr[mid])
+            return binarySearch(arr, (mid + 1), high, key);
+        return binarySearch(arr, low, (mid - 1), key);
+    }                     
+    // main function
+    public static void main(String args[])
+    {
+        // Let us search 3 in below array
+        int arr1[] = { 5, 6, 7, 8, 9, 10, 1, 2, 3 };
+        int n = arr1.length;
+        int key = 3;
+        System.out.println("Index of the element is : "
+                        + pivotedBinarySearch(arr1, n, key));
+    }
+}                  
+                        </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+    Index of the element is : 8</pre>
+                    </div>
+                </div>
+            </details><br>
+            <li>Find maximum value of Sum( i*arr[i]) with only rotations on given array allowed</li>
+            <details>
+                <summary>Open/Close Code</summary>
+                <div class="codebox">
+                    <div class="code">
+                        <pre>
+// Java program to find max value of i*arr[i]
+import java.util.Arrays;
+                        
+class Test
+{
+    static int arr[] = new int[]{10, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    
+    // Returns max possible value of i*arr[i]
+    static int maxSum()
+    {
+        // Find array sum and i*arr[i] with no rotation
+        int arrSum = 0; // Stores sum of arr[i]
+        int currVal = 0; // Stores sum of i*arr[i]
+        for (int i=0; i<arr.length; i++)
+        {
+            arrSum = arrSum + arr[i];
+            currVal = currVal+(i*arr[i]);
+        }
+        // Initialize result as 0 rotation sum
+        int maxVal = currVal;
+    
+        // Try all rotations one by one and find
+        // the maximum rotation sum.
+        for (int j=1; j<arr.length; j++)
+
+        {
+            currVal = currVal + arrSum-arr.length*arr[arr.length-j];
+            if (currVal > maxVal)
+                maxVal = currVal;
+        }
+    
+        // Return result
+        return maxVal;
+    }
+    
+    // Driver method to test the above function
+    public static void main(String[] args)
+    {
+        System.out.println("Max sum is " + maxSum());
+    }
+}                  
+                               
+                        </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+    Max sum is 330</pre>
+                    </div>
+                </div>
+            </details><br>
+            <li>Find the Rotation Count in Rotated Sorted array</li>
+            <details>
+                <summary>Open/Close Code</summary>
+                <div class="codebox">
+                    <div class="code">
+                        <pre>
+// Java program to find number of
+// rotations in a sorted and rotated
+// array.
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class LinearSearch
+{
+    // Returns count of rotations for an
+    // array which is first sorted in
+    // ascending order, then rotated
+    static int countRotations(int arr[], int n)
+    {
+        // We basically find index of minimum
+        // element
+        int min = arr[0], min_index = -1;
+        for (int i = 0; i < n; i++)
+        {
+            if (min > arr[i])
+            {
+                min = arr[i];
+                min_index = i;
+            }
+        }
+        return min_index;
+    }                       
+    // Driver program to test above functions
+    public static void main (String[] args)
+    {
+        int arr[] = {15, 18, 2, 3, 6, 12};
+        int n = arr.length;
+    
+        System.out.println(countRotations(arr, n));
+    }
+}
+                 
+                           
+                        </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+    2</pre>
+                    </div>
+                </div>
+            </details><br>
+            <li>Find a rotation with maximum hamming distance</li>
+            <details>
+                <summary>Open/Close Code</summary>
+                <div class="codebox">
+                    <div class="code">
+                        <pre>
+// Java program to Find another array
+// such that the hamming distance
+// from the original array is maximum
+class GFG
+{
+// Return the maximum hamming
+// distance of a rotation
+static int maxHamming(int arr[], int n)
+{
+    // arr[] to brr[] two times so that
+    // we can traverse through all rotations.
+    int brr[]=new int[2 *n + 1];
+    for (int i = 0; i < n; i++)
+        brr[i] = arr[i];
+    for (int i = 0; i < n; i++)
+        brr[n+i] = arr[i];
+
+    // We know hamming distance with
+    // 0 rotation would be 0.
+    int maxHam = 0;
+
+    // We try other rotations one by one
+    // and compute Hamming distance
+    // of every rotation
+    for (int i = 1; i < n; i++)
+    {
+        int currHam = 0;
+        for (int j = i, k=0; j < (i + n); j++,
+                                        k++)
+            if (brr[j] != arr[k])
+                currHam++;
+
+        // We can never get more than n.
+        if (currHam == n)
+            return n;
+
+        maxHam = Math.max(maxHam, currHam);
+    }
+
+    return maxHam;
+}
+
+// driver code
+public static void main (String[] args)
+{
+    int arr[] = {2, 4, 6, 8};
+    int n = arr.length;
+    System.out.print(maxHamming(arr, n));	
+}
+}        
+                        </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+4</pre>
+                    </div>
+                </div>
+            </details><br>
+            <li>Print left rotation of array in O(n) time and O(1) space</li>
+            <details>
+                <summary>Open/Close Code</summary>
+                <div class="codebox">
+                    <div class="code">
+                        <pre>
+// JAVA implementation of left rotation
+// of an array K number of times
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class arr_rot {
+    // Function to leftRotate array multiple
+    // times
+    static void leftRotate(int arr[], int n, int k)
+    {
+        /* To get the starting point of
+        rotated array */
+        int mod = k % n;
+
+        // Prints the rotated array from
+        // start position
+        for (int i = 0; i < n; ++i)
+            System.out.print(arr[(i + mod) % n] + " ");
+
+        System.out.println();
+    }
+
+    // Driver code
+    public static void main(String[] args)
+    {
+        int arr[] = { 1, 3, 5, 7, 9 };
+        int n = arr.length;
+
+        int k = 2;
+    
+        // Function Call
+        leftRotate(arr, n, k);
+
+        k = 3;
+    
+        // Function Call
+        leftRotate(arr, n, k);
+
+        k = 4;
+    
+        // Function Call
+        leftRotate(arr, n, k);
+    }
+}
+                      
+                        </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+ 5 7 9 1 3 
+7 9 1 3 5 
+9 1 3 5 7 
+                        </pre>
+                    </div>
+                </div>
+            </details><br>
+            <li>Find element at given index after a number of rotations</li>
+            <details>
+                <summary>Open/Close Code</summary>
+                <div class="codebox">
+                    <div class="code">
+                        <pre>
+// Java code to rotate an array
+// and answer the index query
+import java.util.*;
+
+class GFG
+{
+    // Function to compute the element at
+    // given index
+    static int findElement(int[] arr, int[][] ranges,
+                            int rotations, int index)
+    {
+        for (int i = rotations - 1; i >= 0; i--) {
+
+            // Range[left...right]
+            int left = ranges[i][0];
+            int right = ranges[i][1];
+
+            // Rotation will not have any effect
+            if (left <= index && right >= index) {
+                if (index == left)
+                    index = right;
+                else
+                    index--;
+            }
+        }
+        // Returning new element
+        return arr[index];
+    }
+
+    // Driver
+    public static void main (String[] args) {
+        int[] arr = { 1, 2, 3, 4, 5 };
+
+        // No. of rotations
+        int rotations = 2;
+    
+        // Ranges according to 0-based indexing
+        int[][] ranges = { { 0, 2 }, { 0, 3 } };
+
+        int index = 1;
+        System.out.println(findElement(arr, ranges,
+                                rotations, index));
+    }
+}                     
+                        </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>3</pre>
+                    </div>
+                </div>
+            </details><br>
+            <li>Split the array and add the first part to the end</li>
+            <details>
+                <summary>Open/Close Code</summary>
+                <div class="codebox">
+                    <div class="code">
+                        <pre>
+// Java program to split array and move first
+// part to end.
+import java.util.*;
+import java.lang.*;
+class GFG {
+    public static void splitArr(int arr[], int n, int k)
+    {
+        for (int i = 0; i < k; i++) {
+
+            // Rotate array by 1.
+            int x = arr[0];
+            for (int j = 0; j < n - 1; ++j)
+                arr[j] = arr[j + 1];
+            arr[n - 1] = x;
+        }
+    }
+
+    // Driver code
+    public static void main(String[] args)
+    {
+        int arr[] = { 12, 10, 5, 6, 52, 36 };
+        int n = arr.length;
+        int position = 2;
+
+        splitArr(arr, 6, position);
+
+        for (int i = 0; i < n; ++i)
+            System.out.print(arr[i] + " ");
+    }
+}
+                            
+                            </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+5 6 52 36 12 10</pre>
+                    </div>
+                </div>
+            </details><br>
+            <li>Minimum swaps required to bring all elements less than or equal to k together</li>
+            <details>
+                <summary>Open/Close Code</summary>
+                <div class="codebox">
+                    <div class="code">
+                        <pre>
+// Java program to find minimum
+// swaps required to club all
+// elements less than or equals
+// to k together
+import java.lang.*;
+
+class GFG {
+    
+// Utility function to find minimum swaps
+// required to club all elements less than
+// or equals to k together
+static int minSwap(int arr[], int n, int k) {
+
+    // Find count of elements which are
+    // less than equals to k
+    int count = 0;
+    for (int i = 0; i < n; ++i)
+    if (arr[i] <= k)
+        ++count;
+
+    // Find unwanted elements in current
+    // window of size 'count'
+    int bad = 0;
+    for (int i = 0; i < count; ++i)
+    if (arr[i] > k)
+        ++bad;
+
+    // Initialize answer with 'bad' value of
+    // current window
+    int ans = bad;
+    for (int i = 0, j = count; j < n; ++i, ++j) {
+
+    // Decrement count of previous window
+    if (arr[i] > k)
+        --bad;                           
+        // Increment count of current window
+        if (arr[j] > k)
+            ++bad;
+    
+        // Update ans if count of 'bad'
+        // is less in current window
+        ans = Math.min(ans, bad);
+        }
+        return ans;
+    }
+    
+    // Driver code
+    public static void main(String[] args)
+    {
+        int arr[] = {2, 1, 5, 6, 3};
+        int n = arr.length;
+        int k = 3;
+        System.out.print(minSwap(arr, n, k) + "\n");
+    
+        int arr1[] = {2, 7, 9, 5, 8, 7, 4};
+        n = arr1.length;
+        k = 5;
+        System.out.print(minSwap(arr1, n, k));
+    }
+    }                        
+                              
+                            </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <!-- <h2>Output</h2>
+                        <div class="output">
+                            <pre></pre>
+                        </div> -->
+                </div>
+            </details><br>
+            <li>Rearrange positive and negative numbers using inbuilt sort function</li>
+            <details>
+                <summary>Open/Close Code</summary>
+                <div class="codebox">
+                    <div class="code">
+                        <pre>
+// Java program to implement the
+// above approach
+import java.io.*;
+class GFG{
+
+static void printArray(int[] array, int length)
+{
+System.out.print("[");
+
+for (int i = 0; i < length; i++)
+{
+    System.out.print(array[i]);
+
+    if (i < (length - 1))
+    System.out.print(",");
+    else
+    System.out.print("]\n");
+}
+}
+
+static void reverse(int[] array,
+                    int start,
+                    int end)
+{
+    while (start < end)
+    {
+        int temp = array[start];
+        array[start] = array[end];
+        array[end] = temp;
+        start++;
+        end--;
+    }
+    }
+    
+    // Rearrange the array with
+    // all negative integers on left
+    // and positive integers on right
+    // use recursion to split the
+    // array with first element
+    // as one half and the rest
+    // array as another and then
+    // merge it with head of
+    // the array in each step
+    static void rearrange(int[] array,
+                        int start,
+                        int end)
+    {
+    // exit condition
+    if (start == end)
+        return;
+    
+    // rearrange the array
+    // except the first element
+    // in each recursive call
+    rearrange(array,
+                (start + 1), end);
+    
+    // If the first element of
+    // the array is positive,
+    // then right-rotate the
+    // array by one place first
+    // and then reverse the merged array.
+    if (array[start] >= 0)
+    {
+        reverse(array,
+                (start + 1), end);
+        reverse(array,
+                start, end);
+    }
+    }
+    
+    // Driver code
+    public static void main(String[] args)
+    {
+    
+    int[] array = {-12, -11, -13,
+                    -5, -6, 7, 5, 3, 6};
+    int length = array.length;
+    int countNegative = 0;
+    
+    for (int i = 0; i < length; i++)
+    {
+        if (array[i] < 0)
+        countNegative++;
+    }
+    
+    System.out.print("array: ");
+    printArray(array, length);
+    rearrange(array, 0,
+            (length - 1));
+    reverse(array, countNegative,
+            (length - 1));
+    System.out.print("rearranged array: ");
+    printArray(array, length);
+    }
+    }                          
+                            </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+ array: [-12, -11, -13, -5, -6, 7, 5, 3, 6]
+ rearranged array: [-12, -11, -13, -5, -6, 7, 5, 3, 6]
+                            </pre>
+                    </div>
+                </div>
+            </details><br>
+            <li>Move all negative elements to end in order with extra space allowed</li>
+            <details>
+                <summary>Open/Close Code</summary>
+                <div class="codebox">
+                    <div class="code">
+                        <pre>
+// Java program to Move All -ve Element At End
+// Without changing order Of Array Element
+import java.util.Arrays;
+                            
+class GFG {
+    
+    // Moves all -ve element to end of array in
+    // same order.
+    static void segregateElements(int arr[], int n)
+    {
+        
+        // Create an empty array to store result
+        int temp[] = new int[n];
+
+        // Traversal array and store +ve element in
+        // temp array
+        int j = 0; // index of temp
+        
+        for (int i = 0; i < n; i++)
+            if (arr[i] >= 0)
+                temp[j++] = arr[i];
+
+        // If array contains all positive or all
+        // negative.
+        if (j == n || j == 0)
+            return;
+
+        // Store -ve element in temp array
+        for (int i = 0; i < n; i++)
+            if (arr[i] < 0)
+                temp[j++] = arr[i];
+
+        // Copy contents of temp[] to arr[]
+        for (int i = 0; i < n; i++)
+            arr[i] = temp[i];
+    }
+    
+    // Driver code
+    public static void main(String arg[])
+    {
+        int arr[] = { 1, -1, -3, -2, 7, 5, 11, 6 };
+        int n = arr.length;
+
+        segregateElements(arr, n);
+
+        for (int i = 0; i < n; i++)
+            System.out.print(arr[i] + " ");
+    }
+}                  </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+1 7 5 11 6 -1 -3 -2 </pre>
+                    </div>
+                </div>
+            </details><br>
+            <li>Positive elements at even and negative at odd positions</li>
+            <details>
+                <summary>Open/Close Code</summary>
+                <div class="codebox">
+                    <div class="code">
+                        <pre>
+// Java program to rearrange positive
+ // and negative numbers
+ import java.io.*;
+                            
+ class GFG {
+ 
+ static void rearrange(int a[], int size)
+ {
+ int positive = 0, negative = 1, temp;
+ 
+     while (true) {
+ 
+     /* Move forward the positive pointer till
+     negative number number not encountered */
+     while (positive < size && a[positive] >= 0)
+         positive += 2;
+ 
+     /* Move forward the negative pointer till
+         positive number number not encountered */
+     while (negative < size && a[negative] <= 0)
+         negative += 2;
+ 
+     // Swap array elements to fix their position.
+     if (positive < size && negative < size) {
+         temp = a[positive];
+         a[positive] = a[negative];
+         a[negative] = temp;
+     }                        
+     /* Break from the while loop when any index
+     exceeds the size of the array */
+     else
+         break;
+     }
+ }
+ 
+ // Driver code
+ public static void main(String args[]) {
+     int arr[] = {1, -3, 5, 6, -3, 6, 7, -4, 9, 10};
+     int n = arr.length;
+ 
+     rearrange(arr, n);
+     for (int i = 0; i < n; i++)
+     System.out.print(arr[i] + " ");
+ }
+ }                       
+                            </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+1 -3 5 -3 6 6 7 -4 9 10 </pre>
+                    </div>
+                </div>
+            </details><br>
+            <li>K maximum sum combinations from two arrays</li>
+            <details>
+                <summary>Open/Close Code</summary>
+                <div class="codebox">
+                    <div class="code">
+                        <pre>
+ // Java program to find K
+ // maximum combinations
+ // from two arrays,
+ import java.io.*;
+ import java.util.*;
+ 
+ class GFG {
+ 
+     // function to display first K
+     // maximum sum combinations
+     static void KMaxCombinations(int A[], int B[],
+                                 int N, int K)
+     {
+         // max heap.
+         PriorityQueue<Integer> pq
+             = new PriorityQueue<Integer>(
+                 Collections.reverseOrder());
+ 
+         // Insert all the possible
+         // combinations in max heap.
+         for (int i = 0; i < N; i++)
+             for (int j = 0; j < N; j++)
+                 pq.add(A[i] + B[j]);
+ 
+         // Pop first N elements
+         // from max heap and
+         // display them.
+         int count = 0;
+ 
+         while (count < K) {
+             System.out.println(pq.peek());
+             pq.remove();
+             count++;
+         }
+     }
+ 
+     // Driver Code
+     public static void main(String[] args)
+     {
+         int A[] = { 4, 2, 5, 1 };
+         int B[] = { 8, 0, 5, 3 };
+         int N = A.length;
+         int K = 3;
+ 
+         // Function Call
+         KMaxCombinations(A, B, N, K);
+     }
+ }
+                            
+                          </pre>
+                        <a href="https://trinket.io/embed/java/f236a16f40">Run by Yourself</a>
+                    </div>
+                    <h2>Output</h2>
+                    <div class="output">
+                        <pre>
+13
+12
+10                               </pre>
+                    </div>
+                </div>
+            </details>
+
+        </ol>
+    </div>
+
+</body>
+
+</html>
